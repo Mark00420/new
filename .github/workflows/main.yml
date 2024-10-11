@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,13 +17,14 @@ jobs:
       run: |
         docker build -t mynodeapp:latest .
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+    - name: List Docker Images (Debugging)
+      run: docker images
 
-    steps:
     - name: Deploy container
       run: |
         docker stop mynodeapp_container || true
-        docker rm mynodeapp_container || true
-        docker run -p 8081:3000 --name mynodeapp_container mynodeapp:latest
+        # docker rm mynodeapp_container || true
+        docker run -d -p 8081:3000 --name mynodeapp_container mynodeapp:latest
+
+    - name: List Docker Containers (Debugging)
+      run: docker ps -a
