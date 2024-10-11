@@ -13,31 +13,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-    - name: Build and push Docker image
+    - name: Build Docker image
       run: |
-        docker build -t mark420 .
-        docker tag mark420 mark00420/mark420:latest
-        docker push mark00420/mark420:latest
+        docker build -t mynodeapp:latest .
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
     - name: Deploy container
       run: |
         docker stop mynodeapp_container || true
         docker rm mynodeapp_container || true
-        docker run -p 8081:3000 mark00420/mark420:latest
+        docker run -d -p 8081:3000 --name mynodeapp_container mynodeapp:latest
