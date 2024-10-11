@@ -16,7 +16,7 @@ jobs:
     - name: Build Docker image
       run: |
         echo "Building Docker image"
-        docker build -t mynodeapp:latest .
+        docker build -t mark420:latest .
         echo "Docker images list after build"
         docker images
 
@@ -26,11 +26,11 @@ jobs:
     - name: Deploy container
       run: |
         echo "Stopping any existing container"
-        docker stop mynodeapp_container || true
+        docker stop mark420_container || true
         echo "Removing any existing container"
-        docker rm mynodeapp_container || true
+        docker rm mark420_container || true
         echo "Running the new container"
-        docker run -d -p 8081:3000 --name mynodeapp_container mynodeapp:latest
+        docker run -d -p 8081:3000 --name mark420_container mark420:latest
         echo "Listing containers after deployment"
         docker ps -a
 
