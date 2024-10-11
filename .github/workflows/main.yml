@@ -16,7 +16,7 @@ jobs:
     - name: Build Docker image
       run: |
         echo "Building Docker image"
-        docker build -t mark420:latest .
+        docker build -t okoko:latest .
         echo "Docker images list after build"
         docker images
         echo "Docker build completed successfully"
