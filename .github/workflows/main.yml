@@ -26,7 +26,7 @@ jobs:
     - name: Deploy container
       run: |
         
-        docker run -d -p 8081:3000 --name mynodeapp_container mynodeapp:latest
+        docker run -p 8081:3000 --name mynodeapp_container mynodeapp:latest
         echo "Listing containers after deployment"
         docker ps -a
 
