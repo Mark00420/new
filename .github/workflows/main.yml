@@ -21,7 +21,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t mark00420/mark420:latest .
+        docker build -t mark420 .
+        docker tag mark420 mark00420/mark420:latest
         docker push mark00420/mark420:latest
 
   deploy:
@@ -39,4 +40,4 @@ jobs:
       run: |
         docker stop mynodeapp_container || true
         docker rm mynodeapp_container || true
-        docker run  -p 8081:3000 --name mynodeapp_container mark00420/mark420:latest
+        docker run -p 8081:3000 mark00420/mark420:latest
