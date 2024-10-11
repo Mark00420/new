@@ -44,4 +44,4 @@ jobs:
       run: |
         docker stop mynodeapp_container || true
         docker rm mynodeapp_container || true
-        docker run -d -p 8081:3000 --name mynodeapp_container mark00420/mark420:latest
+        docker run -d -p 8082:3000 --name mynodeapp_container mark00420/mark420:latest
