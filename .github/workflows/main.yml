@@ -25,11 +25,12 @@ jobs:
 
     - name: Deploy container
       run: |
-        echo "Stopping any existing container"
-        docker stop mynodeapp_container || true
-        #echo "Removing any existing container"
-        #docker rm mynodeapp_container || true
-        echo "Running the new container"
+        
         docker run -d -p 8081:3000 --name mynodeapp_container mynodeapp:latest
         echo "Listing containers after deployment"
         docker ps -a
+
+    - name: Curl Check
+      run: |
+        sleep 10  # Give the container some time to start
+        curl -v http://localhost:8081
