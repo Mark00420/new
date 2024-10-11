@@ -19,6 +19,7 @@ jobs:
         docker build -t mark420:latest .
         echo "Docker images list after build"
         docker images
+        echo "Docker build completed successfully"
 
     - name: List Docker Images (Debugging)
       run: docker images
@@ -31,8 +32,13 @@ jobs:
         docker rm mark420_container || true
         echo "Running the new container"
         docker run -d -p 8081:3000 --name mark420_container mark420:latest
-        echo "Listing containers after deployment"
-        docker ps -a
+        echo "Container run command executed"
+
+    - name: List Docker Containers (Debugging)
+      run: docker ps -a
+
+    - name: Container Logs
+      run: docker logs mark420_container
 
     - name: Curl Check
       run: |
