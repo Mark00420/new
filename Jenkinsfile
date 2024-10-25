@@ -1,17 +1,14 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_HUB_REPO = 'mark00420/mark420'
     }
-
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Mark00420/new.git'
+                git branch: 'main', url: 'https://github.com/Mark00420/new.git'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -19,7 +16,6 @@ pipeline {
                 }
             }
         }
-
         stage('Run Tests') {
             steps {
                 script {
@@ -27,7 +23,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy') {
             steps {
                 script {
@@ -40,4 +35,10 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
+
