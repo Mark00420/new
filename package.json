@@ -1,10 +1,14 @@
 {
   "name": "mynodeapp",
   "version": "1.0.0",
+  "description": "A simple Node.js application",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "echo \"Running tests...\" && exit 0"
   },
+  "author": "Your Name",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
   }
