@@ -12,24 +12,24 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_HUB_REPO .'
+                    bat 'docker build -t %DOCKER_HUB_REPO% .'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    sh 'docker run $DOCKER_HUB_REPO npm test'
+                    bat 'docker run %DOCKER_HUB_REPO% npm test'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    sh '''
+                    bat '''
                     docker stop mynodeapp_container || true
                     docker rm mynodeapp_container || true
-                    docker run -d -p 8081:3000 --name mynodeapp_container $DOCKER_HUB_REPO
+                    docker run -d -p 8081:3000 --name mynodeapp_container %DOCKER_HUB_REPO%
                     '''
                 }
             }
@@ -41,4 +41,3 @@ pipeline {
         }
     }
 }
-
